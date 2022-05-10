@@ -2,4 +2,6 @@
 <p>Find me in app/views/statics/index.html.erb</p>
 
 
+<% if current_user and current_user.has_role? :admin %>
 <%= link_to "Create", "#", class: "btn btn-primary" %>
+<% end %>
