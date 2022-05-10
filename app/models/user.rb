@@ -7,9 +7,9 @@ class User < ApplicationRecord
 
   validates :mobileno,
   :presence => true,
-  :uniqueness => {
-    :case_sensitive => false
-  } # etc.
+  :uniqueness => true,
+  if: :check_mobile_no
+
 
   attr_accessor :login
 
@@ -30,4 +30,14 @@ class User < ApplicationRecord
     end
   end
 
+  private
+
+  def check_mobile_no
+    if self.mobileno.to_s.size != 10
+      self.errors[:base] << "Invalid mobile number"
+      return false
+    end
+  end
+
 end
+
